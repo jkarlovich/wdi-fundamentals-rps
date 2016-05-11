@@ -3,11 +3,11 @@
 ////////////////////////////////////////////////
 'use strict';
 
-function getInput() {
+var getInput = function() {
     console.log("Please choose either 'rock', 'paper', or 'scissors'.")
     return prompt();
 }
-function randomPlay() {
+var randomPlay = function() {
     var randomNumber = Math.random();
     if (randomNumber < 0.33) {
         return "rock";
@@ -21,18 +21,22 @@ function randomPlay() {
 /*           Write Your Code Below            */
 ////////////////////////////////////////////////
 
-function getPlayerMove(move) {
+var getPlayerMove = function(move) {
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `getInput()`.
-    return /* Your Expression */;
-}
+    if (move !== undefined || null){return move;
+    } else {getInput();
+    }
+  }
 
-function getComputerMove(move) {
+var getComputerMove = function(move) {
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `randomPlay()`.
-    return /* Your Expression */;
+    if (move !== ""){return move;
+    } else {return randomPlay();
+    }
 }
 
 function getWinner(playerMove,computerMove) {
@@ -52,4 +56,3 @@ function playToFive() {
     /* YOUR CODE HERE */
     return [playerWins, computerWins];
 }
-
