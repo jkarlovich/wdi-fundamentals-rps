@@ -4,9 +4,11 @@
 'use strict';
 
 var getInput = function() {
-    console.log("Please choose either 'rock', 'paper', or 'scissors'.")
-    return prompt();
+    console.log("Please choose either 'rock', 'paper', or 'scissors'.");
+    var answer = prompt();
+    return answer;
 }
+
 var randomPlay = function() {
     var randomNumber = Math.random();
     if (randomNumber < 0.33) {
@@ -17,27 +19,29 @@ var randomPlay = function() {
         return "scissors";
     }
 }
+
 ////////////////////////////////////////////////
 /*           Write Your Code Below            */
 ////////////////////////////////////////////////
 
-var getPlayerMove = function(move) {
+var getPlayerMove = function(playerMove) {
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `getInput()`.
-    if (move !== undefined || null){return move;
-    } else {getInput();
+    if (playerMove !== undefined || null){return playerMove;
+    }
+    else {getInput();
     }
   }
 
-var getComputerMove = function(move) {
-    // Write an expression that operates on a variable called `move`
-    // If a `move` has a value, your expression should evaluate to that value.
-    // However, if `move` is not specified / is null, your expression should equal `randomPlay()`.
-    if (move !== ""){return move;
-    } else {return randomPlay();
-    }
-}
+  var getComputerMove = function(computerMove) {
+      // Write an expression that operates on a variable called `move`
+      // If a `move` has a value, your expression should evaluate to that value.
+      // However, if `move` is not specified / is null, your expression should equal `randomPlay().
+      if (computerMove === undefined || null){return randomPlay();
+      } else {return computerMove;
+      }
+  }
 
 var getWinner = function(playerMove,computerMove) {
     var winner;
@@ -45,7 +49,7 @@ var getWinner = function(playerMove,computerMove) {
     // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
     // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
     /* YOUR CODE HERE */
-    if (playerMove === 'rock' && computerMove === 'paper'){
+  if (playerMove === 'rock' && computerMove === 'paper'){
       winner = 'computer';
     }
     else if (playerMove === 'rock' && computerMove === 'scissors'){
@@ -67,7 +71,27 @@ function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
-    // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
-    /* YOUR CODE HERE */
-    return [playerWins, computerWins];
+    while(playerWins<5 && computerWins<5){
+    	var playerMove = getInput();
+    	getPlayerMove(playerMove);
+    	var computerMove = randomPlay();
+		getComputerMove(computerMove);
+		var winner = getWinner(playerMove, computerMove);
+    	if (winner === 'player'){
+    		playerWins = playerWins + 1;
+    		console.log('Player chose ' + playerMove + ' while Computer chose ' + computerMove);
+  			console.log('The score is currently ' + playerWins + ' to ' + computerWins + '\n');
+    	}
+    	if(winner === 'computer') {
+    		computerWins = computerWins + 1;
+    		console.log('Player chose ' + playerMove + ' while Computer chose ' + computerMove);
+  			console.log('The score is currently ' + playerWins + ' to ' + computerWins + '\n');
+    	}
+    	if(winner === 'tie'){
+    		console.log('Player chose ' + playerMove + ' while Computer chose ' + computerMove);
+  			console.log('The score is currently ' + playerWins + ' to ' + computerWins + '\n');
+    	}
+   		}
+   		return [playerWins, computerWins];
 }
+playToFive();
